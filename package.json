@@ -1,0 +1,73 @@
+{
+  "name": "whatsapp-retail-blast",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "main": "main.cjs",
+
+  "description": "WhatsApp bulk messaging desktop app",
+  "author": "Ravi",
+
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "node --watch server/index.js",
+    "dev:client": "vite --port 3000",
+    "build": "vite build",
+    "start": "NODE_ENV=production node server/index.js",
+
+    "electron": "electron .",
+    "build:mac": "electron-builder --mac",
+    "build:win": "electron-builder --win"
+  },
+
+  "build": {
+    "appId": "com.whatsapp.blast",
+    "productName": "WhatsApp Blast",
+    "npmRebuild": false,
+
+    "files": [
+      "dist/**/*",
+      "server/**/*",
+      "main.cjs",
+      "package.json"
+    ],
+
+    "extraResources": [
+      {
+        "from": "server",
+        "to": "server"
+      }
+    ],
+
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/chatting_3721843.icns"
+    },
+
+    "win": {
+      "target": "nsis",
+      "icon": "assets/chatting_3721843.ico"
+    }
+  },
+
+  "dependencies": {
+    "better-sqlite3": "^11.7.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "qrcode": "^1.5.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "wait-on": "^9.0.5",
+    "whatsapp-web.js": "^1.26.1-alpha.3"
+  },
+
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.0",
+    "electron": "25.9.8",
+    "electron-builder": "26.8.1",
+    "vite": "^6.0.0"
+  }
+}
